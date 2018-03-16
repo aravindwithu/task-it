@@ -12,7 +12,7 @@ export class AuthService {
     console.log("in auth");
     this.setUser();
   }
-
+  s
   setUser(){
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -21,8 +21,6 @@ export class AuthService {
       } else {
         this.state = false;
         this.user = null;
-        // User is signed out.
-        // ...
       }
     });
   }
