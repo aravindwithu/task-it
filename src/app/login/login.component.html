@@ -1,6 +1,6 @@
-<div  *ngIf="!getIsSignUp()" class="container border mb-2 content">
+<div  *ngIf="!getIsSignup()" class="container border mb-2 content">
   <div *ngIf="!getIsTaskITLogin()" class="text-center">
-    <h4 class="text-success p-2">Please Login or signup!</h4>
+    <h4 class="text-success p-2">Please Login or Sign Up!</h4>
 
     <button (click)="taskItLogin()" class="btn btn-secondary btn-lg btn-block btn-login mb-2">
       <span class="fa fa-login"></span>
@@ -28,57 +28,69 @@
     </button>
 
     <P class="text-secondary mt-3">
-          New to Task It -&#62; <a href="#" (click)="setIsSignUp()">create account</a>.
+          New to Task It -&#62; <a href="#" (click)="setIsSignup()">create account</a>.
     </P>
   </div>
 
   <div *ngIf="getIsTaskITLogin()">
     <button (click)="backToLogin()" class="btn btn-link"> &#60;- Back</button>
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="loginPost(loginForm.value)">
       <h4 class="text-success text-center p-1">Login</h4>
+
       <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="invalidLogin" *ngIf="false" class="form-text text-danger">Invalid login email or password.</small>
       </div>
+
       <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        <small id="emailHelp" class="form-text text-primary">
-            Forgot Password
-          </small>
+        <label for="email">Email address</label>
+        <input type="email" formControlName="login_email" class="form-control" id="email" placeholder="Enter email">
+        <small id="emailMand" *ngIf="!loginForm.controls['login_email'].valid && loginForm.controls['login_email'].touched" class="form-text text-danger">Please enter valid email.</small>
       </div>
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Keep me loged in</label>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="login_password" class="form-control" id="password" placeholder="Password">
+        <small id="passwordMand" *ngIf="!loginForm.controls['login_password'].valid && loginForm.controls['login_password'].touched" class="form-text text-danger">Please enter a password.</small>
+        <small id="passwordHelp" class="form-text text-primary">Forgot Password</small>
       </div>
-      <button class="btn btn-primary btn-lg btn-block btn-login mt-3 mb-3">
-          <span class="fa fa-login"></span>
+
+      <!--<div class="form-check">
+        <input type="checkbox" class="form-check-input" id="check">
+        <label class="form-check-label" for="check">Keep me loged in</label>
+      </div>-->
+
+      <button class="btn btn-primary btn-lg btn-block mt-3 mb-3" [disabled]="!loginForm.valid">
           login
-        </button>
+      </button>
     </form>
   </div>
 </div>
 
-<div *ngIf="getIsSignUp()" class="container border mb-2 content">
-    <button (click)="resetIsSignUp()" class="btn btn-link"> &#60;- Back</button>
-    <form>
+<div *ngIf="getIsSignup()" class="container border mb-2 content">
+    <button (click)="resetIsSignup()" class="btn btn-link"> &#60;- Back</button>
+    <form [formGroup]="signupForm" (ngSubmit)="signupPost(signupForm.value)">
       <h4 class="text-success text-center p-1">Sign Up</h4>
+
       <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <label for="email">Email address</label>
+        <input type="email" formControlName="signup_email"  class="form-control" id="email" placeholder="Enter email">
+        <small id="emailMand" *ngIf="!signupForm.controls['signup_email'].valid && signupForm.controls['signup_email'].touched" class="form-text text-danger">Please enter valid email.</small>
       </div>
+      
       <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <label for="password">Password</label>
+        <input type="password" formControlName="signup_password" class="form-control" id="password" placeholder="Password">
+        <small id="passwordMand" *ngIf="!signupForm.controls['signup_password'].valid && signupForm.controls['signup_password'].touched" class="form-text text-danger">Please enter a password.</small>
       </div>
 
       <div class="form-group">
-          <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password">
-        </div>
+        <input type="password" formControlName="confirm_password" class="form-control" id="confirm-password" placeholder="Confirm Password">
+        <small id="passwordMand" *ngIf="!signupForm.controls['confirm_password'].valid && signupForm.controls['confirm_password'].touched" class="form-text text-danger">Please enter a password.</small>
+        <small id="passwordMisMatch" *ngIf="false" class="form-text text-danger">Password and confirm password mismatch.</small>
+      </div>
       
-      <button class="btn btn-primary btn-lg btn-block btn-login mt-3 mb-3">
-          <span class="fa fa-login"></span>
-          login
-        </button>
+      <button class="btn btn-primary btn-lg btn-block mt-3 mb-3" [disabled]="!signupForm.valid">
+          Sign Up
+      </button>
     </form>
   </div>
