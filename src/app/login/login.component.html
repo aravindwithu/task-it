@@ -1,8 +1,8 @@
 <div  *ngIf="!getIsSignup()" class="container border mb-2 content">
-  <div *ngIf="!getIsTaskITLogin()" class="text-center">
+  <div *ngIf="!getIsLogin()" class="text-center">
     <h4 class="text-success p-2">Please Login or Sign Up!</h4>
 
-    <button (click)="taskItLogin()" class="btn btn-secondary btn-lg btn-block btn-login mb-2">
+    <button (click)="setIsLogin()" class="btn btn-secondary btn-lg btn-block btn-login mb-2">
       <span class="fa fa-login"></span>
       T<span class="text-warning">&#60;</span>ask<span class="text-warning">&#62;</span>!t
     </button>
@@ -32,8 +32,8 @@
     </P>
   </div>
 
-  <div *ngIf="getIsTaskITLogin()">
-    <button (click)="backToLogin()" class="btn btn-link"> &#60;- Back</button>
+  <div *ngIf="getIsLogin()">
+    <button (click)="resetIsLogin()" class="btn btn-link"> &#60;- Back</button>
     <form [formGroup]="loginForm" (ngSubmit)="loginPost(loginForm.value)">
       <h4 class="text-success text-center p-1">Login</h4>
 
@@ -62,6 +62,10 @@
       <button class="btn btn-primary btn-lg btn-block mt-3 mb-3" [disabled]="!loginForm.valid">
           login
       </button>
+
+      <P class="text-secondary text-center mt-2">
+          New to Task It -&#62; <a href="#" (click)="setIsSignup()">create account</a>.
+    </P>
     </form>
   </div>
 </div>

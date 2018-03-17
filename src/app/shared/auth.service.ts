@@ -11,19 +11,23 @@ export class AuthService {
 
   constructor(public afAuth: AngularFireAuth) {
     console.log("in auth");
-    this.setUser();
+    this.authUser();
   }
-  s
-  setUser(){
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        this.state = true;
-        this.user = user;
-      } else {
-        this.state = false;
-        this.user = null;
-      }
+  
+  authUser(){
+    firebase.auth().onAuthStateChanged((user) => {
+      this.setUser(user);
     });
+  }
+
+  setUser(user){
+    if (user) {
+      this.state = true;
+      this.user = user;
+    } else {
+      this.state = false;
+      this.user = null;
+    }
   }
 
   getUser() {
@@ -39,20 +43,34 @@ export class AuthService {
   }
 
   signup(email, password){
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
+    return firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((user)=>{
+      this.setUser(user);
+      console.log('Login Sucessfull');
+      console.log('state',this.state);
+      console.log('user',this.user);
+      return user;
+    })
+    .catch((error) => {
       var errorMessage = error.message;
-      // ...
+      console.log( error.code + " - " + error.message);
+      return error;
     });
   }
 
   login(email, password){
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((user)=>{
+      this.setUser(user);
+      console.log('Login Sucessfull');
+      console.log('state',this.state);
+      console.log('user',this.user);
+      return user;
+    })
+    .catch((error) => {
       var errorMessage = error.message;
-      // ...
+      console.log( error.code + " - " + error.message);
+      return error;
     });
   }
 }

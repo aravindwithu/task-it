@@ -10,13 +10,13 @@ import { ValidationService } from '../shared/validation.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private isTaskITLogin:boolean = false;
+  private isLogin:boolean = false;
   private isSignup:boolean = false;
 
   loginForm:FormGroup;
   signupForm:FormGroup;
   post:any;
-  
+
   constructor(
     private auth: AuthService, 
     private fb:FormBuilder,
@@ -34,22 +34,22 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isTaskITLogin = false;
-    console.log("isTaskITLogin -> ", this.isTaskITLogin);
+    this.resetIsLogin();
+    this.resetIsSignup();
+    console.log("isTaskITLogin -> ", this.isLogin);
     console.log("isSignUp -> ", this.isSignup);
   }
 
-  taskItLogin(){
-    this.isSignup = false;
-    this.isTaskITLogin = true;
+  getIsLogin(){
+    return this.isLogin;
   }
 
-  backToLogin(){
-    this.isTaskITLogin = false;
+  setIsLogin(){
+    this.isLogin = true;
   }
 
-  getIsTaskITLogin(){
-    return this.isTaskITLogin;
+  resetIsLogin(){
+    this.isLogin = false;
   }
 
   getIsSignup(){
@@ -64,19 +64,32 @@ export class LoginComponent implements OnInit {
     this.isSignup = false;
   }
 
-  loginPost(post){
-    let email = post.login_email;
-    let password:string = post.login_password;
-    console.log('email -> ',email);
-    console.log('password -> ',password);
-    //this.auth.login(email, password);
-  }
-
   signupPost(post){
     let email = post.signup_email;
     let password:string = post.signup_password;
     console.log('email -> ',email);
     console.log('password -> ',password);
-    //this.auth.signup(email, password);
+    this.auth.signup(email, password).then((user)=>{
+      console.log(user);
+      this.signupForm.reset();
+      this.resetIsSignup();
+    }).catch((error)=>{
+      console.log(error);
+    });
   }
+
+  loginPost(post){
+    let email = post.login_email;
+    let password:string = post.login_password;
+    console.log('email -> ',email);
+    console.log('password -> ',password);
+    this.auth.login(email, password).then((user)=>{
+      console.log(user);
+      this.loginForm.reset();
+      this.resetIsLogin();
+    }).catch((error)=>{
+      console.log(error);
+    });
+  }
+  
 }
