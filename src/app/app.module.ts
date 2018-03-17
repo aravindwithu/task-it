@@ -13,7 +13,6 @@ import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { SignupComponent } from './signup/signup.component';
 import { AuthService } from './shared/auth.service';
 
 
@@ -25,8 +24,7 @@ import { AuthService } from './shared/auth.service';
     FooterComponent,
     AboutComponent,
     LoginComponent,
-    HomeComponent,
-    SignupComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
