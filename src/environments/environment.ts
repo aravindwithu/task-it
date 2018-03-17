@@ -8,11 +8,11 @@ import { FirebaseApp } from "angularfire2";
 export const environment = {
   production: false,
   firebase:{
-    apiKey: "AIzaSyCBEL4a8q4juvR2qUoSH5k49akQ5aybeKA",
-    authDomain: "the-log-4301d.firebaseapp.com",
-    databaseURL: "https://the-log-4301d.firebaseio.com",
-    projectId: "the-log-4301d",
-    storageBucket: "",
-    messagingSenderId: "1060587901365"
+    apiKey: "AIzaSyANTAU_tTV42CZvH5yBKswc9DxlcKonlZA",
+    authDomain: "task-it-ae210.firebaseapp.com",
+    databaseURL: "https://task-it-ae210.firebaseio.com",
+    projectId: "task-it-ae210",
+    storageBucket: "task-it-ae210.appspot.com",
+    messagingSenderId: "1047014997477"
   }
 };
