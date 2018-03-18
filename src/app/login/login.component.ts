@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angular/forms'
 import { AuthService } from '../shared/auth.service';
 import { ValidationService } from '../shared/validation.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService, 
     private fb:FormBuilder,
-    private validation: ValidationService) { 
+    private validation: ValidationService,
+    private router:Router) { 
     this.loginForm = fb.group({
       'login_email' : [null, Validators.compose([Validators.required, Validators.pattern(validation.getEmailPattern())])],
       'login_password' : [null, Validators.required]
@@ -76,6 +78,7 @@ export class LoginComponent implements OnInit {
     console.log('email -> ',email);
     console.log('password -> ',password);
     this.auth.login(email, password);
+    this.router.navigate(['/home']);
   }
 
   loginWithGoogle(){

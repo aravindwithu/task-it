@@ -6,11 +6,9 @@ import { RouterModule } from '@angular/router'
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
-
 //import { environment } from './../environments/environment.prod';
 import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
-import { rootConfig } from './app.router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
@@ -20,6 +18,13 @@ import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './shared/auth.service';
 import { ValidationService } from './shared/validation.service';
+
+const rootConfig = [
+  { path:'',component: CoverComponent },
+  { path:'cover',component: CoverComponent },
+  { path:'home',component: HomeComponent },
+  { path: '**', component: NotFoundComponent }
+];
 
 @NgModule({
   declarations: [
