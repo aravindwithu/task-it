@@ -8,13 +8,12 @@ import { AuthService } from './shared/auth.service';
 })
 export class AppComponent implements OnInit{
   title = 'app';
-  user:any;
 
-  constructor(private auth: AuthService
-   ) { }
-  
+  constructor(private auth: AuthService, ) { }
+
   ngOnInit() {
-    this.user = this.auth.user;
+    this.auth.authUserState().then((res) => {
+      console.log('User status ',res);
+    });
   }
-
 }

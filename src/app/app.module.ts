@@ -20,9 +20,9 @@ import { AuthService } from './shared/auth.service';
 import { ValidationService } from './shared/validation.service';
 
 const rootConfig = [
-  { path:'',component: CoverComponent },
-  { path:'cover',component: CoverComponent },
+  { path:'',component: HomeComponent },
   { path:'home',component: HomeComponent },
+  { path:'cover',component: CoverComponent },
   { path: '**', component: NotFoundComponent }
 ];
 
@@ -39,8 +39,8 @@ const rootConfig = [
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase),
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     RouterModule.forRoot(rootConfig)
   ],

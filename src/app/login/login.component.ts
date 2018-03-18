@@ -1,9 +1,7 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angular/forms'
 import { AuthService } from '../shared/auth.service';
 import { ValidationService } from '../shared/validation.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,8 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService, 
     private fb:FormBuilder,
-    private validation: ValidationService,
-    private router:Router) { 
+    private validation: ValidationService) { 
+    
     this.loginForm = fb.group({
       'login_email' : [null, Validators.compose([Validators.required, Validators.pattern(validation.getEmailPattern())])],
       'login_password' : [null, Validators.required]
@@ -33,6 +31,7 @@ export class LoginComponent implements OnInit {
       'signup_password' : [null, Validators.required],
       'confirm_password' : [null, Validators.required]
     });
+    
   }
 
   ngOnInit() {
@@ -65,23 +64,26 @@ export class LoginComponent implements OnInit {
   }
 
   signupPost(post){
-    let email = post.signup_email;
-    let password:string = post.signup_password;
-    console.log('email -> ',email);
-    console.log('password -> ',password);
-    this.auth.signup(email, password);
+    this.auth.signup(post.signup_email, post.signup_password);
   }
 
   loginPost(post){
-    let email = post.login_email;
-    let password:string = post.login_password;
-    console.log('email -> ',email);
-    console.log('password -> ',password);
-    this.auth.login(email, password);
-    this.router.navigate(['/home']);
+    this.auth.login(post.login_email, post.login_password);
   }
 
   loginWithGoogle(){
     this.auth.loginWithGoogle();
+  }
+
+  loginWithFacebook(){
+    this.auth.loginWithFacebook();
+  }
+
+  loginWithTwitter(){
+    this.auth.loginWithTwitter();
+  }
+
+  loginWithGithub(){
+    this.auth.loginWithGithub();
   }
 }
