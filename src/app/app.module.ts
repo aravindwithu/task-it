@@ -9,7 +9,7 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 //import { environment } from './../environments/environment.prod';
 import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
@@ -29,7 +29,7 @@ const rootConfig = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    NavbarComponent,
     FooterComponent,
     AboutComponent,
     LoginComponent,

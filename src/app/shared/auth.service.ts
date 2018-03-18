@@ -7,7 +7,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Injectable()
 export class AuthService {
   private _user: firebase.User = null;
-  private _status:boolean=false;
+  private _status:boolean = false;
 
   constructor(private af: AngularFireAuth, private router:Router) {
   }
