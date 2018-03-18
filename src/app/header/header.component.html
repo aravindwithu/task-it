@@ -1,9 +1,37 @@
-<header class="text-center mt-2">
-  <h1 class="text-primary">
-    T<span class="text-danger">&#60;</span>ask<span class="text-danger">&#62;</span>!t
-  </h1>
-  <h3 class="text-secondary">
-    Welcome to Task It, perfect tool for small scale business and Errands.
-  </h3>
+<header>
+  <div *ngIf="!authState" class="text-center mt-2">
+    <h1 class="text-primary">
+      T<span class="text-danger">&#60;</span>ask<span class="text-danger">&#62;</span>!t
+    </h1>
+    <h3 class="text-secondary">
+      Welcome to Task It, perfect tool for small scale business and Errands.
+    </h3>
+  </div>
+
+  <div *ngIf="authState">
+      <nav class="navbar navbar-expand-lg navbar-light">
+          
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="nav navbar-nav" id="nav-tab" role="tablist">
+
+            <a class="nav-item nav-link active" id="nav-welcome-tab" data-toggle="tab" href="#nav-welcome" role="tab" aria-controls="nav-welcome" aria-selected="true">Welcome</a>
+
+            <a class="nav-item nav-link" id="nav-resume-tab" data-toggle="tab" href="#nav-resume" role="tab" aria-controls="nav-resume" aria-selected="false">Resume</a>
+            
+            <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
+
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+
+            <!--<a class="nav-link primary" href="https://github.com/aravindwithu" target="_blank">GitHub</a>-->
+
+            <a class="nav-link primary" href="https://www.linkedin.com/in/aravind-venkit/" target="_blank">LinkedIn</a>
+
+          </div>
+        </div>
+      </nav>
+  </div>
   <hr/>
 </header>
