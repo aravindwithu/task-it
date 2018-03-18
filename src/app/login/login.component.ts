@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.resetIsLogin();
     this.resetIsSignup();
-    console.log("isTaskITLogin -> ", this.isLogin);
-    console.log("isSignUp -> ", this.isSignup);
   }
 
   getIsLogin(){
@@ -69,13 +67,7 @@ export class LoginComponent implements OnInit {
     let password:string = post.signup_password;
     console.log('email -> ',email);
     console.log('password -> ',password);
-    this.auth.signup(email, password).then((user)=>{
-      console.log(user);
-      this.signupForm.reset();
-      this.resetIsSignup();
-    }).catch((error)=>{
-      console.log(error);
-    });
+    this.auth.signup(email, password);
   }
 
   loginPost(post){
@@ -83,13 +75,10 @@ export class LoginComponent implements OnInit {
     let password:string = post.login_password;
     console.log('email -> ',email);
     console.log('password -> ',password);
-    this.auth.login(email, password).then((user)=>{
-      console.log(user);
-      this.loginForm.reset();
-      this.resetIsLogin();
-    }).catch((error)=>{
-      console.log(error);
-    });
+    this.auth.login(email, password);
   }
-  
+
+  loginWithGoogle(){
+    this.auth.loginWithGoogle();
+  }
 }
