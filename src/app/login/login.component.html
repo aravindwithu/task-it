@@ -27,9 +27,10 @@
       GitHub
     </button>
 
-    <P class="text-secondary mt-3">
-          New to Task It -&#62; <a href="#" (click)="setIsSignup()">create account</a>.
-    </P>
+    <p class=" text-secondary">
+      <span class="align-middle">New to Task It -&#62;</span>
+      <span class="btn btn-link p-0" (click)="setIsSignup()">Create account</span>
+    </p>
   </div>
 
   <div *ngIf="getIsLogin()">
@@ -53,19 +54,15 @@
         <small id="passwordMand" *ngIf="!loginForm.controls['login_password'].valid && loginForm.controls['login_password'].touched" class="form-text text-danger">Please enter a password.</small>
         <small id="passwordHelp" class="form-text text-primary">Forgot Password</small>
       </div>
-
-      <!--<div class="form-check">
-        <input type="checkbox" class="form-check-input" id="check">
-        <label class="form-check-label" for="check">Keep me loged in</label>
-      </div>-->
-
+      
       <button class="btn btn-primary btn-lg btn-block mt-3 mb-3" [disabled]="!loginForm.valid">
           login
       </button>
 
-      <P class="text-secondary text-center mt-2">
-          New to Task It -&#62; <a href="#" (click)="setIsSignup()">create account</a>.
-    </P>
+      <p class="text-center text-secondary">
+          <span class="align-middle">New to Task It -&#62;</span>
+          <span class="btn btn-link p-0" (click)="setIsSignup()">Create account</span>
+      </p>
     </form>
   </div>
 </div>
