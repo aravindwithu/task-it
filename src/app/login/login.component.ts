@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angular/forms'
 import { AuthService } from '../shared/auth.service';
 import { ValidationService } from '../shared/validation.service';
+import {Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private auth: AuthService, 
     private fb:FormBuilder,
-    private validation: ValidationService) { 
+    private validation: ValidationService,
+    private router:Router) { 
     
     this.loginForm = fb.group({
       'login_email' : [null, Validators.compose([Validators.required, Validators.pattern(validation.getEmailPattern())])],
@@ -64,15 +66,21 @@ export class LoginComponent implements OnInit {
   }
 
   signupPost(post){
-    this.auth.signup(post.signup_email, post.signup_password);
+    this.auth.signup(post.signup_email, post.signup_password).then(()=>{
+      this.router.navigate(['/home']);
+    });
   }
 
   loginPost(post){
-    this.auth.login(post.login_email, post.login_password);
+    this.auth.login(post.login_email, post.login_password).then(()=>{
+      this.router.navigate(['/home']);
+    });
   }
 
   loginWithGoogle(){
-    this.auth.loginWithGoogle();
+    this.auth.loginWithGoogle().then(()=>{
+      this.router.navigate(['/home']);
+    });
   }
 
   loginWithFacebook(){

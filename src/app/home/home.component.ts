@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-home',
@@ -8,12 +11,18 @@ import { AuthService } from '../shared/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private auth: AuthService) {
+  constructor(
+    private auth: AuthService,
+    private router:Router
+  ) {
    }
 
   ngOnInit() {
-    this.auth.authUserState().then((res) => {
-      console.log('User status ',res);
+  }
+
+  logout(){
+    this.auth.signout().then(()=>{
+      this.router.navigate(['/cover']);
     });
   }
 }

@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule } from '@angular/material';
+
 //import { environment } from './../environments/environment.prod';
 import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
@@ -17,11 +20,15 @@ import { CoverComponent } from './cover/cover.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './shared/auth.service';
+import { EventsManagerService } from './shared/events-manager.service';
 import { ValidationService } from './shared/validation.service';
+import { HomeCardComponent } from './home-card/home-card.component';
+import { HomeListComponent } from './home-list/home-list.component';
+import { HomeMainComponent } from './home-main/home-main.component';
 
 const rootConfig = [
-  { path:'',component: HomeComponent },
-  { path:'home',component: HomeComponent },
+  { path:'',component: HomeComponent},
+  { path:'home',component: HomeComponent},
   { path:'cover',component: CoverComponent },
   { path: '**', component: NotFoundComponent }
 ];
@@ -35,16 +42,25 @@ const rootConfig = [
     LoginComponent,
     HomeComponent,
     CoverComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeCardComponent,
+    HomeListComponent,
+    HomeMainComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    RouterModule.forRoot(rootConfig)
+    RouterModule.forRoot(rootConfig),
+    BrowserAnimationsModule,
+    MatButtonModule, 
+    MatCardModule, 
+    MatMenuModule, 
+    MatToolbarModule, 
+    MatIconModule
   ],
-  providers: [AuthService, ValidationService, AngularFireAuth],
+  providers: [AuthService, EventsManagerService, ValidationService, AngularFireAuth],
   bootstrap: [AppComponent],
 
 })
