@@ -22,13 +22,23 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './shared/auth.service';
 import { EventsManagerService } from './shared/events-manager.service';
 import { ValidationService } from './shared/validation.service';
-import { HomeCardComponent } from './home-card/home-card.component';
-import { HomeListComponent } from './home-list/home-list.component';
-import { HomeMainComponent } from './home-main/home-main.component';
+import { TaskCardComponent } from './task-card/task-card.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { TaskMainComponent } from './task-main/task-main.component';
+import { PostComponent } from './post/post.component';
+import { AskComponent } from './ask/ask.component';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { TaskComponent } from './task/task.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 
 const rootConfig = [
   { path:'',component: HomeComponent},
   { path:'home',component: HomeComponent},
+  { path:'task',component: TaskComponent},
+  { path:'update-profile',component: UpdateProfileComponent},
+  { path:'view-profile',component: ViewProfileComponent},
+  { path:'post',component: PostComponent},
+  { path:'ask',component: AskComponent},
   { path:'cover',component: CoverComponent },
   { path: '**', component: NotFoundComponent }
 ];
@@ -43,9 +53,14 @@ const rootConfig = [
     HomeComponent,
     CoverComponent,
     NotFoundComponent,
-    HomeCardComponent,
-    HomeListComponent,
-    HomeMainComponent
+    TaskCardComponent,
+    TaskListComponent,
+    TaskMainComponent,
+    PostComponent,
+    AskComponent,
+    ViewProfileComponent,
+    TaskComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,

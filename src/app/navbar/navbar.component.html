@@ -1,41 +1,39 @@
 <header *ngIf='isLoggedIn'>
-  <nav class="navbar-light row justify-content-between align-middle mt-2 mb-2">
+  <nav class="navbar-light row justify-content-between align-middle mt-2 mb-1">
     <div class=" btn col-sm-0">
-      <span class="navbar-toggler-icon btn border-0"></span>
+      <a class="navbar-toggler-icon btn border-0"></a>
     </div>
     <div class="navbar-brand text-primary text-left col-sm-2">
-      T<span class="text-danger">&#60;</span>ask<span class="text-danger">&#62;</span>!t
+      <a class="" routerLink="/home">
+        T<span class="text-danger">&#60;</span>ask<span class="text-danger">&#62;</span>!t
+      </a>
     </div>
-    <div class="row col-sm-6">
-        <input class="form-control col-sm-10" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary col-sm-0 ml-2" type="submit">Go</button>
-    </div>
-    <div class="text-right text-scondary col-sm-3">
-      <a class="btn">Post</a>
-      <a class="btn">Ask</a>
-      <div class="btn" (click)='logout()'>
-        
-         <img src="../assets/user-profile.png" class="img-profile" alt="Logout">
 
+    <div class="col-sm-6">
+      <div class="input-group">
+        <input type="text" class="form-control r-0" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-light r-0" type="button">
+              <i class="fa fa-search"></i>
+          </button>
+        </span>
       </div>
+    </div>
+
+    <div class="text-right text-scondary col-sm-3">
+      <a class="ml-3 mr-2" routerLink="/post" routerLinkActive="active">Post</a>
+      <a class="ml-3 mr-2" routerLink="/ask" routerLinkActive="active">Ask</a>
+      <span class="dropdown show">
+        <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="../assets/user-profile.png" class="img-profile" alt="Logout">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="#" routerLink="/view-profile" routerLinkActive="active">Profile</a>
+          <a class="dropdown-item" href="#">Settings</a>
+          <a class="dropdown-item" (click)='logout()' routerLink="/cover" routerLinkActive="active">Log Out</a>
+        </div>
+      </span>
     </div>
   </nav>
   <hr class="m-0">
 </header>
-
-
-<!-- 
-    <nav  class="navbar navbar-expand-lg navbar-light">
-    <div class="navbar-toggler-icon btn"></div>
-    <div class="navbar-brand text-primary align-middle ml-3">
-        T<span class="text-danger">&#60;</span>ask<span class="text-danger">&#62;</span>!t
-    </div>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <div class="nav-item nav-link btn btn-link" (click)='logout()'>Post</div>
-        <div class="nav-item nav-link btn btn-link" (click)='logout()'>Ask</div>
-        <div class=" nav-item nav-linkbtn btn-link" (click)='logout()'>Logout</div>
-      </div>
-    </div>
-  </nav>
--->

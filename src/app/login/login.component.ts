@@ -67,19 +67,19 @@ export class LoginComponent implements OnInit {
 
   signupPost(post){
     this.auth.signup(post.signup_email, post.signup_password).then(()=>{
-      this.router.navigate(['/home']);
+      this.router.navigate(['/task']);
     });
   }
 
   loginPost(post){
     this.auth.login(post.login_email, post.login_password).then(()=>{
-      this.router.navigate(['/home']);
+      this.router.navigate(['/task']);
     });
   }
 
   loginWithGoogle(){
     this.auth.loginWithGoogle().then(()=>{
-      this.router.navigate(['/home']);
+      this.router.navigate(['/task']);
     });
   }
 
