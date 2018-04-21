@@ -1,3 +1,34 @@
-<p>
-  post works!
-</p>
+<main>
+  <form class="form-content" [formGroup]="postForm" (ngSubmit)="getPost(postForm.value)">
+    <h4 class="text-success text-center mt-3">Post a task</h4>
+
+    <div class="form-group">
+      <label for="category">Post to</label>
+      <div class="input-group">
+        <select class="form-control post-to-select text-primary bg-outline-primary" formControlName="category" id="category">
+          <option>(S) Self</option>
+          <option>(F) Friend</option>
+          <option>(C) Collegue</option>
+          <option>(T) Team</option>
+          <option>(G) Group</option>
+          <option>(O) Circle</option>
+        </select>
+        <input type="text" formControlName="post_to" class="form-control post-to-input" id="post_to" placeholder="Whom to post">
+      </div>
+    </div> 
+
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <input type="text" formControlName="subject" class="form-control" id="subject" placeholder="Enter the subject">
+    </div>
+
+    <div class="form-group">
+      <label for="discription">Discription</label>
+      <textarea class="form-control" formControlName="discription" id="discription" rows="10"></textarea>
+    </div>
+
+    <button class="btn btn-primary btn-lg btn-block mt-3 mb-3 form-btn" [disabled]="!postForm.valid">
+      Post
+    </button>
+  </form>
+</main>

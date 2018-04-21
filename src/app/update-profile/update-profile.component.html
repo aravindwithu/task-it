@@ -1,39 +1,46 @@
 <main>
     <form class="form-content" [formGroup]="updateProfileForm" (ngSubmit)="updateProfile(updateProfileForm.value)">
       <h4 class="text-success text-center mt-3">Update your profile</h4>
-      
       <div class="form-group">
-        <label for="first_name">First Name</label>
+        <label for="email">Email your address*</label>
+        <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
+        <small id="emailMand" *ngIf="!updateProfileForm.controls['email'].valid && updateProfileForm.controls['email'].touched" class="form-text text-danger">Please enter valid email.</small>
+      </div>
+      <div class="form-group">
+        <label for="first_name">First Name*</label>
         <input type="text" formControlName="first_name" class="form-control" id="first_name" placeholder="Enter your first name">
       </div>
-      
       <div class="form-group">
-        <label for="last_name">Last Name</label>
+        <label for="last_name">Last Name*</label>
         <input type="text" formControlName="last_name" class="form-control" id="last_name" placeholder="Enter your last name">
       </div>
       <div class="form-group">
-        <label for="phone">Phone</label>
+        <label for="phone">Phone*</label>
         <input type="text" formControlName="phone" class="form-control" id="phone" placeholder="Enter your phone number">
       </div>
+
       <div class="form-group">
-        <label for="">Street</label>
-        <input type="text" formControlName="street" class="form-control" id="street" placeholder="Enter your street">
+        <label for="address">Address</label>
+        <input type="text" formControlName="address" class="form-control" id="address" placeholder="Enter your address">
       </div>
-      <div class="form-group">
-        <label for="city">City</label>
-        <input type="text" formControlName="city" class="form-control" id="city" placeholder="Enter your city">
-      </div>
-      <div class="form-group">
-        <label for="state">State</label>
-        <input type="text" formControlName="state" class="form-control" id="state" placeholder="Enter your state">
-      </div>
-      
-          
+
       <button class="btn btn-primary btn-lg btn-block mt-3 mb-3 form-btn" [disabled]="!updateProfileForm.valid">
         Update Profile
       </button>
-  
-     
-  
     </form>
   </main>
+
+
+
+  <!-- <div class="form-group">
+      <label for="">Street</label>
+      <input type="text" formControlName="street" class="form-control" id="street" placeholder="Enter your street">
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" formControlName="city" class="form-control" id="city" placeholder="Enter your city">
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" formControlName="state" class="form-control" id="state" placeholder="Enter your state">
+    </div>  -->

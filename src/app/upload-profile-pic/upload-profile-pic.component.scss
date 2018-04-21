@@ -1,0 +1,28 @@
+.upload-pic{
+    position: relative;
+    display: inline-block;
+    max-width: 350px;
+}
+
+.upload-pic img{
+    max-height: 350px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: grey;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    width: 100%;
+}

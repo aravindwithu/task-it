@@ -15,12 +15,14 @@ export class UpdateProfileComponent implements OnInit {
   ) 
   {
     this.updateProfileForm = fb.group({
+      'email': [null, Validators.required],
       'first_name' : [null, Validators.required],
       'last_name' : [null, Validators.required],
       'phone' : [null, Validators.required],
-      'street' : [null, Validators.required],
-      'city' : [null, Validators.required],
-      'state' : [null, Validators.required]
+      'address' : [null, Validators.required]
+      // 'street' : [null, Validators.required],
+      // 'city' : [null, Validators.required],
+      // 'state' : [null, Validators.required]
     });
   }
 

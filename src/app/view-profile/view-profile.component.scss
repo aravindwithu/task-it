@@ -1,0 +1,31 @@
+.profile-pic{
+    position: relative;
+	display: inline-block;
+}
+
+.profile-pic img{
+    max-width: 350px;
+    max-height: 350px;
+}
+
+.edit-img {
+	padding-top: 7px;	
+	padding-right: 7px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	display: none;
+}
+
+.profile-pic:hover img{
+    -webkit-filter: brightness(50%);
+    filter: brightness(50%);
+}
+
+.profile-pic:hover .edit-img  {
+    display: block;
+   
+}
+
+
+

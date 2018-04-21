@@ -30,12 +30,14 @@ import { AskComponent } from './ask/ask.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { TaskComponent } from './task/task.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { UploadProfilePicComponent } from './upload-profile-pic/upload-profile-pic.component';
 
 const rootConfig = [
   { path:'',component: HomeComponent},
   { path:'home',component: HomeComponent},
   { path:'task',component: TaskComponent},
   { path:'update-profile',component: UpdateProfileComponent},
+  { path:'upload-profile-pic',component: UploadProfilePicComponent},
   { path:'view-profile',component: ViewProfileComponent},
   { path:'post',component: PostComponent},
   { path:'ask',component: AskComponent},
@@ -60,7 +62,8 @@ const rootConfig = [
     AskComponent,
     ViewProfileComponent,
     TaskComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    UploadProfilePicComponent
   ],
   imports: [
     BrowserModule,
