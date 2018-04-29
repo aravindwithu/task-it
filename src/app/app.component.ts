@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.auth.authUserState().then((res) => {
-      console.log('User status ',res);
+      console.log('User loggedIn status: ',res);
     });
   }
 }

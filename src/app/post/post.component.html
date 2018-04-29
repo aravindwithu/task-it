@@ -1,5 +1,5 @@
 <main>
-  <form class="form-content" [formGroup]="postForm" (ngSubmit)="getPost(postForm.value)">
+  <form class="form-content" [formGroup]="postForm" (ngSubmit)="setPost(postForm.value)">
     <h4 class="text-success text-center mt-3">Post a task</h4>
 
     <div class="form-group">
@@ -23,8 +23,8 @@
     </div>
 
     <div class="form-group">
-      <label for="discription">Discription</label>
-      <textarea class="form-control" formControlName="discription" id="discription" rows="10"></textarea>
+      <label for="description">Description</label>
+      <textarea class="form-control" formControlName="description" id="description" rows="10"></textarea>
     </div>
 
     <button class="btn btn-primary btn-lg btn-block mt-3 mb-3 form-btn" [disabled]="!postForm.valid">

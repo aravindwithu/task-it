@@ -20,19 +20,15 @@ export class AuthService {
       this.af.auth.onAuthStateChanged((user) => {
         let returnStr = 'init';
         if (user) {
-          console.log('User logged in as ', user.email);
           this._user = user;
           this._status = true;
           this.eventsManager.isLoggedIn(true);
-          returnStr = 'logged in';
         }else{
-          console.log('User logged out');
           this._user = null;
           this._status = false;
           this.eventsManager.isLoggedIn(false);
-          returnStr = 'logged out';
         }
-        res(returnStr);
+        res(this._status);
       });
     });
     return promise;

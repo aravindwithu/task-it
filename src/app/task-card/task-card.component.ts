@@ -7,10 +7,13 @@ import {MatCard, MatButton} from '@angular/material';
   styleUrls: ['./task-card.component.scss']
 })
 export class TaskCardComponent implements OnInit {
+  constructor() {
 
-  constructor() { }
+  }
 
   ngOnInit() {
   }
+
+
 
 }

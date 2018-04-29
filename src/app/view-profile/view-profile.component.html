@@ -2,7 +2,7 @@
   <h4 class="text-success m-3">Profile Information</h4>
   <div class="profile-pic">
     <!-- <img src="../assets/user-profile.png" alt="../assets/user-default.png"> -->
-    <img src="../assets/cute-profile-pic.png" alt="../assets/user-default.png">
+    <img [src]="profile_pic" alt="../assets/user-default.png">
     <!-- <img src="../assets/user-default.png" alt=""> -->
     <div class="edit-img">
       <a routerLink="/upload-profile-pic" routerLinkActive="active">
@@ -11,14 +11,14 @@
     </div>
   </div>
   
-  <div class="mt-3">
-    <h5>Aravindhan Venkituswamy 
+  <div *ngIf = "profileData" class="mt-3">
+    <h5>{{profileData.first_name + " " + profileData.last_name }} 
       <a routerLink="/update-profile" routerLinkActive="active">
         <i class="fa fa-pencil text-muted"></i>
       </a>
     </h5>
-    <p>6072329492</p>
-    <p>avenkitu@binghamton.edu</p>
-    <p>61, Endicott Ave, Johnson City, NY-13790</p>
+    <p>{{profileData.phone}} </p>
+    <p  *ngIf = "auth.user">{{auth.user.email}}</p>
+    <p>{{profileData.address}}</p>
   </div>
 </main>

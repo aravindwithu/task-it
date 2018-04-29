@@ -3,19 +3,23 @@
   <h4 class="text-success m-3">Profile Information</h4>
 
   <div class="form-group upload-pic">
-    <img id='img-upload' src="../assets/user-default.png" alt="profile image">
+    <img id='img-upload' [src]="profile_pic" alt="profile image">
 
     <div class="input-group mt-4">
 
-      <input type="text" class="form-control r-0" readonly>
+      <input type="text" value={{img_name}} class="form-control r-0" readonly>
 
       <span class="input-group-btn">
         <span class="btn btn-default btn-file text-light bg-secondary r-0">
-          Browse… <input type="file" id="imgInp" (change)='browse()'>
+          Browse… <input type="file" id="imgInp" (change)="browse($event)" accept=".png,.jpg">
         </span>
       </span>
 
     </div>
+
+    <button (click)="upload()" class="btn btn-primary btn-lg btn-block mt-3 mb-3 form-btn">
+      Upload
+    </button>
 
   </div>
 </main>

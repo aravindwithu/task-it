@@ -2,11 +2,6 @@
     <form class="form-content" [formGroup]="updateProfileForm" (ngSubmit)="updateProfile(updateProfileForm.value)">
       <h4 class="text-success text-center mt-3">Update your profile</h4>
       <div class="form-group">
-        <label for="email">Email your address*</label>
-        <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
-        <small id="emailMand" *ngIf="!updateProfileForm.controls['email'].valid && updateProfileForm.controls['email'].touched" class="form-text text-danger">Please enter valid email.</small>
-      </div>
-      <div class="form-group">
         <label for="first_name">First Name*</label>
         <input type="text" formControlName="first_name" class="form-control" id="first_name" placeholder="Enter your first name">
       </div>

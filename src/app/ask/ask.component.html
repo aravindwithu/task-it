@@ -1,5 +1,5 @@
 <main>
-  <form class="form-content" [formGroup]="askForm" (ngSubmit)="getPost(askForm.value)">
+  <form class="form-content" [formGroup]="askForm" (ngSubmit)="setPost(askForm.value)">
     <h4 class="text-success text-center mt-3">Ask a task</h4>
 
     <div class="form-group">
@@ -13,7 +13,7 @@
           <option>(G) Group</option>
           <option>(O) Circle</option>
         </select>
-        <input type="text" formControlName="ask-to" class="form-control ask-to-input" id="ask-to" placeholder="Whom to post">
+        <input type="text" formControlName="ask_to" class="form-control ask-to-input" id="ask_to" placeholder="Whom to post">
       </div>
     </div> 
 
@@ -23,8 +23,8 @@
     </div>
 
     <div class="form-group">
-      <label for="discription">Discription</label>
-      <textarea class="form-control" formControlName="discription" id="discription" rows="10"></textarea>
+      <label for="description">Description</label>
+      <textarea class="form-control" formControlName="description" id="description" rows="10"></textarea>
     </div>
 
     <button class="btn btn-primary btn-lg btn-block mt-3 mb-3 form-btn" [disabled]="!askForm.valid">
