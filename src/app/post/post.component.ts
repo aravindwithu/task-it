@@ -33,6 +33,13 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.authUserState().then((res) => {
+      if(res){
+       
+      }else{
+        // rerout to cover login
+      }
+    });
   }
 
   setPost(post){
@@ -41,14 +48,16 @@ export class PostComponent implements OnInit {
 
     console.log(timeStampInMs, Date.now());
     let task_data = {
-     'category': post.category,
-      'post_to': post.post_to,
-      'subject': post.subject,
-      'description': post.description,
-      'status': 'assigned',
-      'created_by': this.auth.user.email,
-      'created_on': Date.now(),
-      'time_stamp': timeStampInMs,
+      category: post.category,
+      to_email: post.post_to,
+      subject: post.subject,
+      description: post.description,
+      status: 'assigned',
+      created_by: this.auth.user.email,
+      created_on: Date.now(),
+      time_stamp: timeStampInMs,
+      update_date: Date.now(),
+      update_by: this.auth.user.email
     }
     profilesRef.add(task_data);
     console.log(post);

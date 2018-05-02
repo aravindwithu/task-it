@@ -1,0 +1,33 @@
+.img-profile{
+    border-radius: 50%;
+    width:55px;
+    height:55px;
+}
+
+.main-h{
+    min-width: 80% !important;
+}
+
+.img-h{
+    min-width: 10% !important;
+}
+
+.v-dots{
+    min-width: 10% !important;
+    margin: auto;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: grey;
+    cursor: inherit;
+    display: block;
+}

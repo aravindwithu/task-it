@@ -42,7 +42,7 @@ import { UploadProfilePicComponent } from './upload-profile-pic/upload-profile-p
 const rootConfig = [
   { path:'',component: HomeComponent},
   { path:'home',component: HomeComponent},
-  { path:'task',component: TaskComponent},
+  { path:'task/:time_stamp',component: TaskComponent},
   { path:'update-profile',component: UpdateProfileComponent},
   { path:'upload-profile-pic',component: UploadProfilePicComponent},
   { path:'view-profile',component: ViewProfileComponent},

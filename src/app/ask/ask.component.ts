@@ -32,23 +32,32 @@ export class AskComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.authUserState().then((res) => {
+      if(res){
+       
+      }else{
+        // rerout to cover login
+      }
+    });
   }
 
   setPost(post){
     console.log(post);
     let profilesRef = this.db.collection("tasks");
-    //let timeStampInMs = window.performance && window.performance.now && window.performance.timing && window.performance.timing.navigationStart ? window.performance.now() + window.performance.timing.navigationStart : Date.now();
+    let timeStampInMs = window.performance && window.performance.now && window.performance.timing && window.performance.timing.navigationStart ? window.performance.now() + window.performance.timing.navigationStart : Date.now();
 
     //console.log(timeStampInMs, Date.now());
     let task_data = {
       category: post.category,
-      ask_to: post.ask_to,
+      to_email: post.ask_to,
       subject: post.subject,
       description: post.description,
       status: 'asked',
       created_by: this.auth.user.email,
       created_on: Date.now(),
-      time_stamp: 'timeStampInMs',
+      time_stamp: timeStampInMs,
+      update_date: Date.now(),
+      update_by: this.auth.user.email
     }
     profilesRef.add(task_data);
   }

@@ -1,28 +1,85 @@
-<div class="m-2">
-  <div>
-      Aravindhan
-      <br/>
-      Subject Heading ...
-      <hr/>
+<div *ngIf="data" class="m-2">
+
+  <div class="d-flex flex-row flex-nowrap">  
+    <div class="img-h">
+      <img [src]="get_img()" class="img-profile" alt="../assets/user-default.png">
+    </div>
+  
+    <h6 *ngIf= "data.subject" class="main-h">
+      <div class="pull-left">
+        <div>{{data.subject}}</div>
+        <div class="pull-right mt-3">{{data.created_by}}</div>
+      </div>
+      <div class="pull-right">
+        <div>{{data.update_date}}</div>
+        <div class="pull-right mt-3">{{data.status}}</div>
+      </div>
+    </h6>  
+
+    <div class="dropdown show v-dots text-center">
+      <a class="btn btn-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-v fa-2x"></i>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink menu-link">
+        <a class="dropdown-item" href="#" routerLink="/view-profile" routerLinkActive="active">Edit</a>
+        <a class="dropdown-item" (click)='logout()' routerLink="/cover" routerLinkActive="active">Delete</a>
+      </div>
+    </div>
+
   </div>
+  <hr class="m-1">
   <div>
-    <h6>Discription</h6>
+    <h6>Description</h6>
     <p>
-      sfasfasfasfasfasdfasdfasfasdfasf
+        {{data.description}}
+        asfdasfasfdasdf cvbvcbcvb cvbcvb cvbcvbcvbc cvbcvbcvbcvb
+        asfdasdfasdfa ewrwrew werwerwer werwer werwer werwer werwer
+        asfasfasf asdfasf asfasfdsafasfsad asdfasfasdfasdfaf afasdfasdf
     </p>
   </div>
-  <div>
-      <h6>Documents</h6>
-      <p>
-        Docs 
-      </p>
-  </div>
+  <hr class="m-1">
 
   <div>
-      <h6>Comments Updates</h6>
-      <p>
-        c u 
-      </p>
+    <h6>Documents</h6>
+    <div *ngFor="let doc of docs">
+      <a target="_blank" [href]="doc.url" class="btn btn-link">{{doc.name}}</a>
+    </div>
+    
+    <div class="input-group-btn">
+      <span class="btn btn-link btn-file">
+        Add <i class="fa fa-plus"></i>
+        <input type="file" id="imgInp" (change)="upload($event)">
+      </span>
+    </div>
+  </div>
+  <hr class="m-1">
+
+  <div>
+    <h6>Comments & Updates</h6>
+    <div *ngIf= "data" class="d-flex flex-row no-wrap">
+      <div class="p-2">
+        <img [src]="get_img()" class="img-profile" alt="../assets/user-default.png">
+      </div>
+      <div class="p-2">
+        <p>
+          fasdfasdf sdafdsf xvxvbvb cvbcvb cvbcvb cvbcvbcvbc cvbcvbcv cvb cvb dsfsdf
+          sfsdfsd sf sdf sdfsdfsdfsdf we rwerw rwe rwer wercvb cvb cvbc bc bcvbcv b
+          sfdsdfsdf sdfsdf sdfsdf sdfsdf sdfsdf sdfsd fsdf sdf sd fsd fsd fsdf sd f
+        </p>
+        <hr class="m-1">
+      </div>
+    </div>
+
+    <div *ngIf= "data" class="d-flex flex-row no-wrap">
+      <div class="p-2">
+        <img [src]="get_img()" class="img-profile" alt="../assets/user-default.png">
+      </div>
+      <div class="p-2" style="width:100%">
+        <textarea class="form-control" id="description" rows="2"></textarea>
+        <div class="btn btn-link pull-right">Update</div>
+      </div>
+    </div>
+    
   </div>
 </div>
 

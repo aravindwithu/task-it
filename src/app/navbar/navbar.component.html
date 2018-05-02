@@ -1,4 +1,4 @@
-<header *ngIf='isLoggedIn'>
+<header *ngIf='isLoggedIn' class="header">
   <nav class="navbar-light row justify-content-between align-middle mt-2 mb-1">
     <div class=" btn col-sm-0">
       <a class="navbar-toggler-icon btn border-0"></a>
@@ -27,7 +27,7 @@
         <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img src="../assets/cute-profile-pic.png" class="img-profile" alt="../assets/user-default.png">
         </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink menu-link">
           <a class="dropdown-item" href="#" routerLink="/view-profile" routerLinkActive="active">Profile</a>
           <a class="dropdown-item" href="#">Settings</a>
           <a class="dropdown-item" (click)='logout()' routerLink="/cover" routerLinkActive="active">Log Out</a>

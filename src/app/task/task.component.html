@@ -1,4 +1,4 @@
-<main class="d-flex flex-row-reverse flex-nowrap">  
-  <app-task-list class='task-list'></app-task-list>
-  <app-task-main class='task-main'></app-task-main>
+<main class="d-flex flex-row-reverse flex-nowrap task">  
+  <app-task-list class='task-list pre-scrollable'></app-task-list>
+  <app-task-main class='task-main' *ngIf="task" [_data]="task"></app-task-main>
 </main>

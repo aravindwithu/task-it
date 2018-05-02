@@ -1,11 +1,14 @@
-.task-list{
-    min-width: 35% !important;
-    min-height: 100% !important;
-    background-color: red; 
+.task{
+    min-height: 700px !important;
 }
 
-.task-main{
+.task-list{
+    border-left: 1px solid lightgray;
+    min-width: 35% !important;
+    min-height: 650px !important;
+}
+
+.task-main{  
     min-width: 65% !important;
     min-height: 100% !important;
-    background-color: yellow; 
 }
