@@ -3,6 +3,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../shared/auth.service';
+import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angular/forms'
 
 @Component({
   selector: 'app-task-main',
@@ -15,11 +16,20 @@ export class TaskMainComponent implements OnInit {
   docs=[];
   comments=[];
 
+  commentForm:FormGroup = new FormGroup({
+    update_txt:new FormControl()
+  });
+
   constructor(
     private afStorage: AngularFireStorage,
     private db: AngularFirestore,
+    private fb:FormBuilder, 
     private auth: AuthService
-  ) { }
+  ) {
+    this.commentForm = fb.group({
+      update_txt: [null, Validators.required],
+    });
+  }
 
   ngOnInit() {
     this.auth.authUserState().then((res) => {
@@ -27,11 +37,19 @@ export class TaskMainComponent implements OnInit {
         if(this._data){
           this.set_img(this._data[0].created_by);
           this.get_docs();
+          this.get_comments();
         }
       }else{
         // rerout to cover login
       }
     });
+  }
+
+  ngOnChanges() {
+
+    this.ngOnInit();
+    // You can also use categoryId.previousValue and 
+    // categoryId.firstChange for comparing old and new values
 
   }
 
@@ -85,18 +103,20 @@ export class TaskMainComponent implements OnInit {
     }
   }
 
-  set_comments(){
+  set_comments(post){
+    console.log(post);
     let comment={
       by_email: this.auth.user.email,
-      comment:"test 1"
+      comment: post.update_txt
     }
 
     this.comments.push(comment);
-    let tasks_docsRef = this.db.collection("tasks_comments");
+    console.log(this.comments);
+    let tasks_commentsRef = this.db.collection("tasks_comments");
     let comments_data = {
       comment_data:this.comments
     }
-    tasks_docsRef.doc(this.data.time_stamp.toString()).set(comments_data);
+    tasks_commentsRef.doc(this.data.time_stamp.toString()).set(comments_data);
   }
 
   get_comments(){

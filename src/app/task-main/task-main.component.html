@@ -56,27 +56,32 @@
 
   <div>
     <h6>Comments & Updates</h6>
-    <div *ngIf= "data" class="d-flex flex-row no-wrap">
-      <div class="p-2">
-        <img [src]="get_img()" class="img-profile" alt="../assets/user-default.png">
+    <div *ngFor="let comment of comments">
+      <div class="d-flex flex-row no-wrap">
+        <div class="p-2">
+          <img [src]="get_img()" class="img-profile" alt="../assets/user-default.png">
+        </div>
+        <div class="p-2">
+          <h6> {{comment.by_email}}</h6>
+          <p>
+              {{comment.comment}}
+          </p>
+        </div>
       </div>
-      <div class="p-2">
-        <p>
-          fasdfasdf sdafdsf xvxvbvb cvbcvb cvbcvb cvbcvbcvbc cvbcvbcv cvb cvb dsfsdf
-          sfsdfsd sf sdf sdfsdfsdfsdf we rwerw rwe rwer wercvb cvb cvbc bc bcvbcv b
-          sfdsdfsdf sdfsdf sdfsdf sdfsdf sdfsdf sdfsd fsdf sdf sd fsd fsd fsdf sd f
-        </p>
-        <hr class="m-1">
-      </div>
+      <hr class="m-1 ml-5">
     </div>
 
-    <div *ngIf= "data" class="d-flex flex-row no-wrap">
+    <div class="d-flex flex-row no-wrap">
       <div class="p-2">
         <img [src]="get_img()" class="img-profile" alt="../assets/user-default.png">
       </div>
       <div class="p-2" style="width:100%">
-        <textarea class="form-control" id="description" rows="2"></textarea>
-        <div class="btn btn-link pull-right">Update</div>
+
+        <form class="form-content" [formGroup]="commentForm" (ngSubmit)="set_comments(commentForm.value)">
+          <textarea formControlName="update_txt" class="form-control" id="update_txt" rows="2"></textarea>
+          <button class="btn btn-link pull-right" [disabled]="!commentForm.valid">Update</button>
+        </form>
+
       </div>
     </div>
     
