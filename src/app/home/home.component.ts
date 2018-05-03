@@ -12,7 +12,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class HomeComponent implements OnInit {
 
-  tasks;
+  tasks = null;
+  noTask:boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
       if(res){
         this.getTasks();
       }else{
-        // rerout to cover login
+        this.router.navigate(['/cover']);
       }
     });
   }
@@ -42,7 +43,11 @@ export class HomeComponent implements OnInit {
       if(data){
         this.tasks = data;
         console.log(data);
+        if(data.length == 0){
+          this.noTask = true;
+        }
       }else{
+        this.noTask = true;
         console.log("No profile data found");
       }
     });

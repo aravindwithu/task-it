@@ -1,5 +1,19 @@
 <main class="d-flex flex-row flex-wrap justify-content-center">
+
+    <div *ngIf="noTask" class="text-center">
+        <p>
+            Tasks yet to be assigned to you.
+        </p>
+        <p>
+            You can either 
+            <a routerLink="/post" routerLinkActive="active">post</a> task or 
+            <a routerLink="/ask" routerLinkActive="active">ask</a> for one.
+        </p>
+    </div>
+
     <div *ngFor="let task of tasks">
         <app-task-card *ngIf="task" [_data]="task"></app-task-card>
     </div>
+
+   
 </main>

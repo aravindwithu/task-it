@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {MatCard, MatButton} from '@angular/material';
 import { AngularFireStorage } from 'angularfire2/storage';
 import {Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-task-card',
@@ -14,15 +15,22 @@ export class TaskCardComponent implements OnInit {
  
   constructor(
     private afStorage: AngularFireStorage,
-    private router:Router
+    private router:Router,
+    private auth: AuthService
   ) {
 
   }
 
   ngOnInit() {
-    if(this.data){
-      this.set_img(this.data.created_by)
-    }
+    this.auth.authUserState().then((res) => {
+      if(res){
+        if(this.data){
+          this.set_img(this.data.created_by)
+        }
+      }else{
+        this.router.navigate(['/cover']);
+      }
+    });
   }
 
   get data(){

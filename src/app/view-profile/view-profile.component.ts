@@ -3,6 +3,7 @@ import { AuthService } from '../shared/auth.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireStorage } from 'angularfire2/storage';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-view-profile',
@@ -17,6 +18,7 @@ export class ViewProfileComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private db: AngularFirestore,
+    private router:Router,
     private afStorage: AngularFireStorage
   ) { }
 
@@ -26,7 +28,7 @@ export class ViewProfileComponent implements OnInit {
         this.get_img();
         this.readProfile();
       }else{
-        //rerout to cover login
+        this.router.navigate(['/cover']);
       }
     });
   }

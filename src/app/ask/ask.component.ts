@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angu
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../shared/auth.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-ask',
@@ -21,6 +22,7 @@ export class AskComponent implements OnInit {
   constructor(
     private fb:FormBuilder,
     private db: AngularFirestore,
+    private router:Router,
     private auth: AuthService
   ) { 
     this.askForm = fb.group({
@@ -36,7 +38,7 @@ export class AskComponent implements OnInit {
       if(res){
        
       }else{
-        // rerout to cover login
+        this.router.navigate(['/cover']);
       }
     });
   }

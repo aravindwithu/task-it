@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { AuthService } from '../shared/auth.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-upload-profile-pic',
@@ -16,6 +17,7 @@ export class UploadProfilePicComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
+    private router:Router,
     private afStorage: AngularFireStorage
   ) {
     
@@ -26,7 +28,7 @@ export class UploadProfilePicComponent implements OnInit {
       if(res){
         this.get_img();
       }else{
-        // rerout to cover login
+        this.router.navigate(['/cover']);
       }
     });
   }
@@ -55,8 +57,11 @@ export class UploadProfilePicComponent implements OnInit {
     let ref = this.afStorage.ref(imgId);
     // the put method creates an AngularFireUploadTask
     // and kicks off the upload
-    let task = ref.put(this.img_file); 
-    alert("image uploaded successfully");
+    let task = ref.put(this.img_file).then((img_data)=>{
+      this.profile_pic = img_data.downloadURL;
+      alert("image uploaded successfully");
+      this.router.navigate(['/view-profile']);
+    });
   }
 
   get_img(){

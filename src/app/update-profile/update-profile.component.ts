@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angu
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../shared/auth.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-update-profile',
@@ -21,6 +22,7 @@ export class UpdateProfileComponent implements OnInit {
   constructor(
     private fb:FormBuilder, 
     private db: AngularFirestore,
+    private router:Router,
     private auth: AuthService
   ) 
   {
@@ -38,7 +40,7 @@ export class UpdateProfileComponent implements OnInit {
       if(res){
        
       }else{
-        // rerout to cover login
+        this.router.navigate(['/cover']);
       }
     });
   }
@@ -46,6 +48,7 @@ export class UpdateProfileComponent implements OnInit {
   updateProfile(post){
     let profilesRef = this.db.collection("profiles");
     profilesRef.doc(this.auth.user.email).set(post);
+    this.router.navigate(['/view-profile']);
   }
 
   readProfile(){

@@ -27,7 +27,7 @@ export class TaskListComponent implements OnInit {
       if(res){
         this.getTasks();
       }else{
-        // rerout to cover login
+        this.router.navigate(['/cover']);
       }
     });
   }
@@ -41,7 +41,6 @@ export class TaskListComponent implements OnInit {
     tasksRef$.subscribe((data) => {
       if(data){
         this.tasks = data;
-        console.log(data);
       }else{
         console.log("No profile data found");
       }

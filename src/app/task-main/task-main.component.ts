@@ -4,6 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../shared/auth.service';
 import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angular/forms'
+import {Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-task-main',
@@ -12,6 +13,7 @@ import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angu
 })
 export class TaskMainComponent implements OnInit {
   @Input() _data:any;
+  comment_pic = null;
   profile_pic = null;
   docs=[];
   comments=[];
@@ -24,7 +26,8 @@ export class TaskMainComponent implements OnInit {
     private afStorage: AngularFireStorage,
     private db: AngularFirestore,
     private fb:FormBuilder, 
-    private auth: AuthService
+    private auth: AuthService,
+    private router:Router
   ) {
     this.commentForm = fb.group({
       update_txt: [null, Validators.required],
@@ -40,17 +43,13 @@ export class TaskMainComponent implements OnInit {
           this.get_comments();
         }
       }else{
-        // rerout to cover login
+        this.router.navigate(['/cover']);
       }
     });
   }
 
   ngOnChanges() {
-
     this.ngOnInit();
-    // You can also use categoryId.previousValue and 
-    // categoryId.firstChange for comparing old and new values
-
   }
 
   set_img(email){
@@ -107,6 +106,7 @@ export class TaskMainComponent implements OnInit {
     console.log(post);
     let comment={
       by_email: this.auth.user.email,
+      by_imgURL: this.profile_pic,
       comment: post.update_txt
     }
 

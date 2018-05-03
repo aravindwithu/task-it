@@ -21,4 +21,9 @@
     <p  *ngIf = "auth.user">{{auth.user.email}}</p>
     <p>{{profileData.address}}</p>
   </div>
+  <div *ngIf = "!profileData" class="mt-3">
+      <a routerLink="/update-profile" routerLinkActive="active">
+        Update profile info <i class="fa fa-pencil text-muted"></i>
+      </a>
+  </div>
 </main>
