@@ -13,8 +13,8 @@ import {Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class TaskMainComponent implements OnInit {
   @Input() _data:any;
-  comment_pic = null;
   profile_pic = null;
+  task_pic = null;
   docs=[];
   comments=[];
 
@@ -38,7 +38,16 @@ export class TaskMainComponent implements OnInit {
     this.auth.authUserState().then((res) => {
       if(res){
         if(this._data){
-          this.set_img(this._data[0].created_by);
+          this.set_img(this._data[0].created_by).then((res)=>{
+            if(res){
+              this.task_pic=res;
+            }
+          });
+          this.set_img(this.auth.user.email).then((res)=>{
+            if(res){
+              this.profile_pic=res;
+            }
+          });
           this.get_docs();
           this.get_comments();
         }
@@ -53,22 +62,31 @@ export class TaskMainComponent implements OnInit {
   }
 
   set_img(email){
-    // create a reference to the storage bucket location
-    console.log('email: ', email);
-    let ref = this.afStorage.ref(email);
-    // the put method creates an AngularFireUploadTask
-    // and kicks off the upload
-    ref.getDownloadURL().toPromise().then((imgURL)=>{
-      console.log(imgURL);
-      this.profile_pic = imgURL;
-      //return data;
-    }).catch((error)=>{
-      console.log(error);
-      //return null;
+    var promise = new Promise((res)=>{
+      // create a reference to the storage bucket location
+      console.log('email: ', email);
+      let ref = this.afStorage.ref(email);
+      // the put method creates an AngularFireUploadTask
+      // and kicks off the upload
+      ref.getDownloadURL().toPromise().then((imgURL)=>{
+        console.log(imgURL);
+        res(imgURL);
+        //return data;
+      }).catch((error)=>{
+        console.log(error);
+        return res(null);
+        //return null;
+      });
     });
+    return promise;
   }
 
-  get_img(){
+  get_task_img(){
+    console.log('get_task',this.task_pic);
+    return this.task_pic;
+  }
+
+  get_profile_img(){
     return this.profile_pic;
   }
 
@@ -117,6 +135,9 @@ export class TaskMainComponent implements OnInit {
       comment_data:this.comments
     }
     tasks_commentsRef.doc(this.data.time_stamp.toString()).set(comments_data);
+    this.commentForm.setValue({
+      update_txt:null
+    }); 
   }
 
   get_comments(){

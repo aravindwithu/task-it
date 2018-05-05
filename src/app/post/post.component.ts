@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angu
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../shared/auth.service';
+// import { SmtpService } from '../shared/smtp.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
@@ -24,7 +25,8 @@ export class PostComponent implements OnInit {
     private fb:FormBuilder, 
     private db: AngularFirestore,
     private auth: AuthService,
-    private router:Router
+    private router:Router,
+    // private smtp:SmtpService
   ) { 
     this.postForm = fb.group({
       category: ["(S) Self", Validators.required],
@@ -47,8 +49,7 @@ export class PostComponent implements OnInit {
   setPost(post){
     let profilesRef = this.db.collection("tasks");
     let timeStampInMs = window.performance && window.performance.now && window.performance.timing && window.performance.timing.navigationStart ? window.performance.now() + window.performance.timing.navigationStart : Date.now();
-
-    console.log(timeStampInMs, Date.now());
+    let now = new Date();
     let task_data = {
       category: post.category,
       to_email: post.post_to,
@@ -56,12 +57,14 @@ export class PostComponent implements OnInit {
       description: post.description,
       status: 'assigned',
       created_by: this.auth.user.email,
-      created_on: Date.now(),
+      created_on: now.toDateString(),
       time_stamp: timeStampInMs,
-      update_date: Date.now(),
+      update_date: now.toDateString(),
       update_by: this.auth.user.email
     }
-    profilesRef.add(task_data);
+    profilesRef.add(task_data).then(()=>{
+      // this.smtp.send_email();
+    });
     console.log(post);
   }
 

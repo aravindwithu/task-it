@@ -2,13 +2,13 @@
 
   <div class="d-flex flex-row flex-nowrap">  
     <div class="img-h">
-      <img [src]="get_img()" class="img-profile" alt="../assets/user-default.png">
+      <img [src]="get_task_img()" class="img-profile" alt="../assets/user-default.png">
     </div>
   
     <h6 *ngIf= "data.subject" class="main-h">
       <div class="pull-left">
         <div>{{data.subject}}</div>
-        <div class="pull-right mt-3">{{data.created_by}}</div>
+        <div class="pull-right mt-3">{{data.created_by}} -&gt; {{data.to_email}}</div>
       </div>
       <div class="pull-right">
         <div>{{data.update_date}}</div>
@@ -70,7 +70,7 @@
 
     <div class="d-flex flex-row no-wrap">
       <div class="p-2">
-        <img [src]="get_img()" class="img-profile" alt="../assets/user-default.png">
+        <img [src]="get_profile_img()" class="img-profile" alt="../assets/user-default.png">
       </div>
       <div class="p-2" style="width:100%">
 
