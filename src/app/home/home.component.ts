@@ -35,12 +35,35 @@ export class HomeComponent implements OnInit {
   getTasks(){
     let tasksRef = this.db.collection('tasks',(ref)=>{
       return ref
-      .where('to_email', '==', this.auth.user.email);
+      .where('to_email', '==', this.auth.user.email)
     });
     let tasksRef$ = tasksRef.valueChanges();
     tasksRef$.subscribe((data) => {
       if(data){
+        this.noTask = false;
         this.tasks = data;
+        this.getTasks2();
+        console.log(data);
+        if(data.length == 0){
+          this.noTask = true;
+        }
+      }else{
+        this.noTask = true;
+        console.log("No profile data found");
+      }
+    });
+  }
+
+  getTasks2(){
+    let tasksRef = this.db.collection('tasks',(ref)=>{
+      return ref
+      .where('created_by', '==', this.auth.user.email)
+    });
+    let tasksRef$ = tasksRef.valueChanges();
+    tasksRef$.subscribe((data) => {
+      if(data){
+        this.noTask = false;
+        this.tasks.push.apply(this.tasks,data);
         console.log(data);
         if(data.length == 0){
           this.noTask = true;
