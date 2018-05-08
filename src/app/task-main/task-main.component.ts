@@ -37,7 +37,7 @@ export class TaskMainComponent implements OnInit {
   ngOnInit() {
     this.auth.authUserState().then((res) => {
       if(res){
-        if(this._data){
+        if(this._data && this._data[0]){
           this.set_img(this._data[0].created_by).then((res)=>{
             if(res){
               this.task_pic=res;
@@ -64,12 +64,10 @@ export class TaskMainComponent implements OnInit {
   set_img(email){
     var promise = new Promise((res)=>{
       // create a reference to the storage bucket location
-      console.log('email: ', email);
-      let ref = this.afStorage.ref(email);
+      let ref = this.afStorage.ref('profiles/'+email);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
       ref.getDownloadURL().toPromise().then((imgURL)=>{
-        console.log(imgURL);
         res(imgURL);
         //return data;
       }).catch((error)=>{
@@ -82,7 +80,6 @@ export class TaskMainComponent implements OnInit {
   }
 
   get_task_img(){
-    console.log('get_task',this.task_pic);
     return this.task_pic;
   }
 
@@ -101,7 +98,7 @@ export class TaskMainComponent implements OnInit {
   upload(event){
     if (event.target.files && event.target.files[0]) {
       // create a reference to the storage bucket location
-      let ref = this.afStorage.ref("tasks/"+ this.data.time_stamp +"/"+event.target.files[0].name);
+      let ref = this.afStorage.ref("tasks/"+ this.data.time_stamp.toString() +"/"+event.target.files[0].name);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
       let task = ref.put(event.target.files[0]).then((doc_data)=>{
@@ -121,7 +118,6 @@ export class TaskMainComponent implements OnInit {
   }
 
   set_comments(post){
-    console.log(post);
     let comment={
       by_email: this.auth.user.email,
       by_imgURL: this.profile_pic,
@@ -129,7 +125,6 @@ export class TaskMainComponent implements OnInit {
     }
 
     this.comments.push(comment);
-    console.log(this.comments);
     let tasks_commentsRef = this.db.collection("tasks_comments");
     let comments_data = {
       comment_data:this.comments
@@ -162,5 +157,39 @@ export class TaskMainComponent implements OnInit {
         console.log("No docs data found");
       }
     });
+  }
+
+  routUpdate(){
+    this.router.navigate(['/task-update',this.data.time_stamp.toString()]);
+  }
+
+  deleteTask(){
+    for (let doc of this.docs) {
+      let file_path = "tasks/"+ this.data.time_stamp.toString()+"/"+doc.name;
+      console.log(file_path);
+      let ref = this.afStorage.ref(file_path);
+      ref.delete();
+    }
+  
+    let tasks_docsRef = this.db.collection("tasks_docs").doc(this.data.time_stamp.toString());
+    tasks_docsRef.delete()
+    .then(() => {
+
+    })
+    .catch(error => console.log(error));
+
+    let tasks_commentsRef = this.db.collection("tasks_comments").doc(this.data.time_stamp.toString());
+    tasks_commentsRef.delete()
+    .then(() => {
+    })
+    .catch(error => console.log(error));
+
+    let tasksRef = this.db.collection("tasks")
+    .doc(this.data.time_stamp.toString());
+    tasksRef.delete()
+    .then(() => {
+    this.router.navigate(['/home']);
+    })
+    .catch(error => console.log(error));
   }
 }

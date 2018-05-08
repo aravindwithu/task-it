@@ -3,8 +3,13 @@ import { FormBuilder, FormControl, Validator, FormGroup, Validators} from '@angu
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../shared/auth.service';
-// import { SmtpService } from '../shared/smtp.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { environment } from '../../environments/environment.prod';
+//import { environment } from '../../environments/environment';
+
+// using SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+//const sgMail = require('@sendgrid/mail');
 
 @Component({
   selector: 'app-post',
@@ -47,8 +52,8 @@ export class PostComponent implements OnInit {
   }
 
   setPost(post){
-    let profilesRef = this.db.collection("tasks");
     let timeStampInMs = window.performance && window.performance.now && window.performance.timing && window.performance.timing.navigationStart ? window.performance.now() + window.performance.timing.navigationStart : Date.now();
+    let profilesRef = this.db.collection("tasks").doc(timeStampInMs.toString());
     let now = new Date();
     let task_data = {
       category: post.category,
@@ -62,10 +67,23 @@ export class PostComponent implements OnInit {
       update_date: now.toDateString(),
       update_by: this.auth.user.email
     }
-    profilesRef.add(task_data).then(()=>{
+    profilesRef.set(task_data).then(()=>{
       // this.smtp.send_email();
+      this.router.navigate(['/home']);
     });
-    console.log(post);
   }
+ 
+  // semd_email(){
+
+  //   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  //   const msg = {
+  //     to: 'avenkit2@binghamton.edu',
+  //     from: 'no-reply@taskit.com',
+  //     subject: 'Sending with SendGrid is Fun',
+  //     text: 'and easy to do anywhere, even with Node.js',
+  //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+  //   };
+  //   sgMail.send(msg);
+  // }
 
 }

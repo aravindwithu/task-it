@@ -44,11 +44,10 @@ export class TaskCardComponent implements OnInit {
   set_img(email){
     // create a reference to the storage bucket location
     console.log('email: ', email);
-    let ref = this.afStorage.ref(email);
+    let ref = this.afStorage.ref('profiles/'+email);
     // the put method creates an AngularFireUploadTask
     // and kicks off the upload
     ref.getDownloadURL().toPromise().then((imgURL)=>{
-      console.log(imgURL);
       this.profile_pic = imgURL;
       //return data;
     }).catch((error)=>{
@@ -62,7 +61,6 @@ export class TaskCardComponent implements OnInit {
   }
 
   routeTask(){
-    console.log("routing to tasks - ", this.data.time_stamp);
     this.router.navigate(['task', this.data.time_stamp]);
   }
 

@@ -43,7 +43,6 @@ export class HomeComponent implements OnInit {
         this.noTask = false;
         this.tasks = data;
         this.getTasks2();
-        console.log(data);
         if(data.length == 0){
           this.noTask = true;
         }
@@ -64,7 +63,6 @@ export class HomeComponent implements OnInit {
       if(data){
         this.noTask = false;
         this.tasks.push.apply(this.tasks,data);
-        console.log(data);
         if(data.length == 0){
           this.noTask = true;
         }

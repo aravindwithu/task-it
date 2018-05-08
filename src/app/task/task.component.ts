@@ -28,7 +28,6 @@ export class TaskComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
           this.time_stamp = parseFloat(params.get('time_stamp'));
           this.getTasks();
-          console.log('in task',this.task);
         });
       }else{
         this.router.navigate(['/cover']);

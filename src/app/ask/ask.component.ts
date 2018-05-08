@@ -44,24 +44,24 @@ export class AskComponent implements OnInit {
   }
 
   setPost(post){
-    console.log(post);
-    let profilesRef = this.db.collection("tasks");
     let timeStampInMs = window.performance && window.performance.now && window.performance.timing && window.performance.timing.navigationStart ? window.performance.now() + window.performance.timing.navigationStart : Date.now();
-    
+    let profilesRef = this.db.collection("tasks").doc(timeStampInMs.toString());
     let now = new Date();
     let task_data = {
       category: post.category,
-      to_email: post.ask_to,
+      to_email: post.post_to,
       subject: post.subject,
       description: post.description,
-      status: 'asked',
+      status: 'assigned',
       created_by: this.auth.user.email,
       created_on: now.toDateString(),
       time_stamp: timeStampInMs,
       update_date: now.toDateString(),
       update_by: this.auth.user.email
     }
-    profilesRef.add(task_data);
+    profilesRef.set(task_data).then(()=>{
+      // this.smtp.send_email();
+      this.router.navigate(['/home']);
+    });
   }
-
 }

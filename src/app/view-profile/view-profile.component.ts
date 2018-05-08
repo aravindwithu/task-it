@@ -37,7 +37,7 @@ export class ViewProfileComponent implements OnInit {
     // create a random id
     let imgId = this.auth.user.email;
     // create a reference to the storage bucket location
-    let ref = this.afStorage.ref(imgId);
+    let ref = this.afStorage.ref('profiles/'+imgId);
     // the put method creates an AngularFireUploadTask
     // and kicks off the upload
     ref.getDownloadURL().toPromise().then((data)=>{

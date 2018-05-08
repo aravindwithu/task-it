@@ -6,18 +6,15 @@ import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
-
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
-
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCardModule, MatMenuModule, MatToolbarModule, MatIconModule } from '@angular/material';
 
-//import { environment } from './../environments/environment.prod';
-import { environment } from './../environments/environment';
+import { environment } from './../environments/environment.prod';
+//import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -38,6 +35,7 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { TaskComponent } from './task/task.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { UploadProfilePicComponent } from './upload-profile-pic/upload-profile-pic.component';
+import { TaskUpdateComponent } from './task-update/task-update.component';
 
 const rootConfig = [
   { path:'',component: HomeComponent},
@@ -48,6 +46,7 @@ const rootConfig = [
   { path:'view-profile',component: ViewProfileComponent},
   { path:'post',component: PostComponent},
   { path:'ask',component: AskComponent},
+  { path:'task-update/:time_stamp',component: TaskUpdateComponent},
   { path:'cover',component: CoverComponent },
   { path: '**', component: NotFoundComponent }
 ];
@@ -70,7 +69,8 @@ const rootConfig = [
     ViewProfileComponent,
     TaskComponent,
     UpdateProfileComponent,
-    UploadProfilePicComponent
+    UploadProfilePicComponent,
+    TaskUpdateComponent
   ],
   imports: [
     BrowserModule,

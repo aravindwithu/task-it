@@ -7,6 +7,7 @@ import { FirebaseApp } from "angularfire2";
 
 export const environment = {
   production: false,
+  SENDGRID_API_KEY: 'stvnR3wlTL6NhMR0MfbM8A',
   firebase:{
     apiKey: "AIzaSyANTAU_tTV42CZvH5yBKswc9DxlcKonlZA",
     authDomain: "task-it-ae210.firebaseapp.com",

@@ -43,7 +43,6 @@ export class UploadProfilePicComponent implements OnInit {
 
   browse(event) {
     if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files[0]);
       this.img_name = event.target.files[0].name;
       this.img_file = event.target.files[0];
       this.read_img(event.target.files[0]);
@@ -54,7 +53,7 @@ export class UploadProfilePicComponent implements OnInit {
     // create a random id
     let imgId = this.auth.user.email;
     // create a reference to the storage bucket location
-    let ref = this.afStorage.ref(imgId);
+    let ref = this.afStorage.ref('profiles/'+imgId);
     // the put method creates an AngularFireUploadTask
     // and kicks off the upload
     let task = ref.put(this.img_file).then((img_data)=>{
@@ -68,7 +67,7 @@ export class UploadProfilePicComponent implements OnInit {
     // create a random id
     let imgId = this.auth.user.email;
     // create a reference to the storage bucket location
-    let ref = this.afStorage.ref(imgId);
+    let ref = this.afStorage.ref('profiles/'+imgId);
     // the put method creates an AngularFireUploadTask
     // and kicks off the upload
     ref.getDownloadURL().toPromise().then((data)=>{
