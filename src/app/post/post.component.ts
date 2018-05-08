@@ -53,7 +53,7 @@ export class PostComponent implements OnInit {
 
   setPost(post){
     let timeStampInMs = window.performance && window.performance.now && window.performance.timing && window.performance.timing.navigationStart ? window.performance.now() + window.performance.timing.navigationStart : Date.now();
-    let profilesRef = this.db.collection("tasks").doc(timeStampInMs.toString());
+    let tasksRef = this.db.collection("tasks").doc(timeStampInMs.toString());
     let now = new Date();
     let task_data = {
       category: post.category,
@@ -67,23 +67,10 @@ export class PostComponent implements OnInit {
       update_date: now.toDateString(),
       update_by: this.auth.user.email
     }
-    profilesRef.set(task_data).then(()=>{
+    tasksRef.set(task_data).then(()=>{
       // this.smtp.send_email();
       this.router.navigate(['/home']);
     });
   }
- 
-  // semd_email(){
-
-  //   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  //   const msg = {
-  //     to: 'avenkit2@binghamton.edu',
-  //     from: 'no-reply@taskit.com',
-  //     subject: 'Sending with SendGrid is Fun',
-  //     text: 'and easy to do anywhere, even with Node.js',
-  //     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-  //   };
-  //   sgMail.send(msg);
-  // }
 
 }

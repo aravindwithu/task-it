@@ -1,6 +1,6 @@
 <main class="d-flex flex-row flex-wrap justify-content-center">
 
-    <div *ngIf="noTask" class="text-center">
+    <div *ngIf="!(tasks && tasks[0])" class="text-center">
         <p>
             Tasks yet to be assigned to you.
         </p>
@@ -12,8 +12,7 @@
     </div>
 
     <div *ngFor="let task of tasks">
-        <app-task-card class="m-2" *ngIf="task" [_data]="task"></app-task-card>
+        <app-task-card *ngIf="task" [_data]="task"></app-task-card>
     </div>
 
-   
 </main>

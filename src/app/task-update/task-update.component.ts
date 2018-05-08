@@ -14,13 +14,11 @@ import { environment } from '../../environments/environment.prod';
 })
 export class TaskUpdateComponent implements OnInit {
   time_stamp;
+  _task;
 
   updateForm:FormGroup = new FormGroup({
-    category:new FormControl(),
-    post_to:new FormControl(),
     subject:new FormControl(),
-    description:new FormControl(),
-    status:new FormControl()
+    description:new FormControl()
   });
 
   constructor(
@@ -42,10 +40,34 @@ export class TaskUpdateComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
           this.time_stamp = parseFloat(params.get('time_stamp'));
         });
+        this.getTasks();
       }else{
         this.router.navigate(['/cover']);
       }
     });
+  }
+
+  getTasks(){
+    let tasksRef = this.db.collection('tasks',(ref)=>{
+      return ref
+      .where('time_stamp', '==', this.time_stamp);
+    });
+    let tasksRef$ = tasksRef.valueChanges();
+    tasksRef$.subscribe((data) => {
+      if(data && data[0]){
+        console.log(data);
+        this.updateForm.setValue({
+          subject: data[0]['subject'],
+          description:  data[0]['description']
+        });
+      }else{
+        console.log("No profile data found");
+      }
+    });
+  }
+
+  get task(){
+    return this._task;
   }
 
   setUpdate(post){
@@ -61,7 +83,7 @@ export class TaskUpdateComponent implements OnInit {
     }
 
     tasksRef.update(task_data).then(()=>{
-      this.router.navigate(['/home']);
+      this.router.navigate(['task', this.time_stamp]);
     });
 
   }

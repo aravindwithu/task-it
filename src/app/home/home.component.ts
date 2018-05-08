@@ -12,7 +12,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class HomeComponent implements OnInit {
 
   tasks = null;
-  noTask:boolean = false;
 
   constructor(
     private auth: AuthService,
@@ -40,15 +39,10 @@ export class HomeComponent implements OnInit {
     let tasksRef$ = tasksRef.valueChanges();
     tasksRef$.subscribe((data) => {
       if(data){
-        this.noTask = false;
         this.tasks = data;
         this.getTasks2();
-        if(data.length == 0){
-          this.noTask = true;
-        }
       }else{
-        this.noTask = true;
-        console.log("No profile data found");
+        console.log("No tasks data found");
       }
     });
   }
@@ -61,14 +55,9 @@ export class HomeComponent implements OnInit {
     let tasksRef$ = tasksRef.valueChanges();
     tasksRef$.subscribe((data) => {
       if(data){
-        this.noTask = false;
         this.tasks.push.apply(this.tasks,data);
-        if(data.length == 0){
-          this.noTask = true;
-        }
       }else{
-        this.noTask = true;
-        console.log("No profile data found");
+        console.log("No tasks data found");
       }
     });
   }

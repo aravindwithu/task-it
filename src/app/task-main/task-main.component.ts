@@ -58,6 +58,10 @@ export class TaskMainComponent implements OnInit {
   }
 
   ngOnChanges() {
+    this.profile_pic = null;
+    this.task_pic = null;
+    this.docs=[];
+    this.comments=[];
     this.ngOnInit();
   }
 
