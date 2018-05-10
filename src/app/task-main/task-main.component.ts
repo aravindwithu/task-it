@@ -84,11 +84,17 @@ export class TaskMainComponent implements OnInit {
   }
 
   get_task_img(){
-    return this.task_pic;
+    if(this.task_pic){
+      return this.task_pic;
+    }
+    return '../assets/user-default.png';
   }
 
   get_profile_img(){
-    return this.profile_pic;
+    if(this.profile_pic){
+      return this.profile_pic;
+    }
+    return '../assets/user-default.png';
   }
 
   set data(dataIn){

@@ -43,21 +43,23 @@ export class TaskCardComponent implements OnInit {
 
   set_img(email){
     // create a reference to the storage bucket location
-    console.log('email: ', email);
     let ref = this.afStorage.ref('profiles/'+email);
     // the put method creates an AngularFireUploadTask
     // and kicks off the upload
     ref.getDownloadURL().toPromise().then((imgURL)=>{
       this.profile_pic = imgURL;
-      //return data;
     }).catch((error)=>{
       console.log(error);
-      //return null;
     });
   }
 
   get_img(){
-    return this.profile_pic;
+    if(this.profile_pic){
+      return this.profile_pic;
+    }
+    return '../assets/user-default.png';
+    
+    
   }
 
   routeTask(){

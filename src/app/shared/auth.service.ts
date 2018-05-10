@@ -18,7 +18,6 @@ export class AuthService {
   authUserState(){
     var promise = new Promise((res)=>{
       this.af.auth.onAuthStateChanged((user) => {
-        let returnStr = 'init';
         if (user) {
           this._user = user;
           this._status = true;
@@ -50,19 +49,35 @@ export class AuthService {
   }
 
   login(email, password){
-    return this.af.auth.signInWithEmailAndPassword(email, password).then(()=>{
-      this.authUserState().then((res) => {
-        console.log('User status ',res);
+    var promise = new Promise((res)=>{
+      this.af.auth.signInWithEmailAndPassword(email, password).then((user)=>{
+        if (user) {
+          this._status = true;
+          this.eventsManager.isLoggedIn(true);
+        }else{
+          this._status = false;
+          this.eventsManager.isLoggedIn(false);
+        }
+        res(this._status);
       });
     });
+    return promise;
   }
 
   loginWithGoogle() {
-    return this.af.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(()=>{
-      this.authUserState().then((res) => {
-        console.log('User status ',res);
+    var promise = new Promise((res)=>{
+      this.af.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((user)=>{
+        if (user) {
+          this._status = true;
+          this.eventsManager.isLoggedIn(true);
+        }else{
+          this._status = false;
+          this.eventsManager.isLoggedIn(false);
+        }
+        res(this._status);
       });
     });
+    return promise;
   }
 
   loginWithFacebook() {

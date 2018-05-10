@@ -26,17 +26,20 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.auth.authUserState().then((res) => {
+      this.eventsManager.isLoggedInEmitter.subscribe((ifLoggedIn)=>{
+        this.isLoggedIn = ifLoggedIn;
+      });
       this.profile_pic = '../assets/user-default.png';
       if(res){
-        this.eventsManager.isLoggedInEmitter.subscribe((ifLoggedIn)=>{
-          this.isLoggedIn = ifLoggedIn;
-        });
-
         this.set_img(this.auth.user.email);
       }else{
         this.router.navigate(['/cover']);
       }
     });
+  }
+
+  ngOnChanges() {
+    this.ngOnInit();
   }
 
   logout(){

@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
 
   loginWithGoogle(){
     this.auth.loginWithGoogle().then(()=>{
+      console.log("loginWithGoogle");
       this.router.navigate(['/home']);
     });
   }

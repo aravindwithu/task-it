@@ -1,5 +1,5 @@
-<mat-card class="btn m-1" style="width:400px" (click)="routeTask()">
-  <div *ngIf= "data" class="d-flex flex-row no-wrap">
+<mat-card *ngIf= "data" class="btn m-1" style="width:400px" (click)="routeTask()">
+  <div class="d-flex flex-row no-wrap">
     <div class="p-2">
       <img [src]="get_img()" class="img-profile" alt="../assets/user-default.png">
     </div>

@@ -9,10 +9,6 @@ export class ValidationService {
   getEmailPattern(){
     return this.emailPattern;
   }
-
-
-
-
 }
 
 
