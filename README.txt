@@ -1,6 +1,7 @@
 Title: Taskit - Task Management System
+Project Website: https://task-it-ae210.firebaseapp.com
 Author: Aravindhan Venkituswamy
-Website: http://aravindvenkit.com/
+Personal Website: http://aravindvenkit.com
 email: avenkit2@binghamton.edu
 
 Abstract:
