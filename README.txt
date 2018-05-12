@@ -41,7 +41,7 @@ Bootstrap: Version – 4.0.0 used for style.
 Font awesome: used for icons, buttons and fonts.
 
 Both Bootstrap and Font Awesome are loaded from CDN (content delivery network) for quick load of the required files. 
-Overall UI look: https://task-it-ae210.firebaseapp.com/post
+Overall UI look: https://task-it-ae210.firebaseapp.com
 
 Firebase
 
