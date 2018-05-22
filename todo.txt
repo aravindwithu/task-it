@@ -1,0 +1,9 @@
+form validations,
+file deletion
+facebook, twitter, github logins.
+signup to profile to home
+update in real time db
+invite friends
+search friends
+view your friends
+post/ask auto search friends
