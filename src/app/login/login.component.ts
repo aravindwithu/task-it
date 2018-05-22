@@ -12,13 +12,14 @@ import {Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class LoginComponent implements OnInit {
   private isLogin:boolean = false;
   private isSignup:boolean = false;
+  private isLoginError:boolean = false;
 
   loginForm:FormGroup;
   signupForm:FormGroup;
   post:any;
 
   constructor(
-    private auth: AuthService, 
+    private auth:AuthService, 
     private fb:FormBuilder,
     private validation: ValidationService,
     private router:Router) { 
@@ -66,21 +67,29 @@ export class LoginComponent implements OnInit {
   }
 
   signupPost(post){
-    this.auth.signup(post.signup_email, post.signup_password).then(()=>{
+    this.auth.signup(post.signup_email, post.signup_password).then((res)=>{
       this.router.navigate(['/view-profile']);
+      console.log(res);
+    }).catch((err)=>{
+      console.log(err);
     });
   }
 
   loginPost(post){
-    this.auth.login(post.login_email, post.login_password).then(()=>{
+    this.auth.login(post.login_email, post.login_password).then((res)=>{
       this.router.navigate(['/home']);
+      this.isLoginError = false;
+    }).catch((err)=>{
+      this.isLoginError = true;
     });
   }
 
   loginWithGoogle(){
-    this.auth.loginWithGoogle().then(()=>{
-      console.log("loginWithGoogle");
+    this.auth.loginWithGoogle().then((res)=>{
       this.router.navigate(['/home']);
+      this.isLoginError = false;
+    }).catch((err)=>{
+      this.isLoginError = true;
     });
   }
 

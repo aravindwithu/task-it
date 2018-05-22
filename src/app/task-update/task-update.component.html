@@ -5,11 +5,13 @@
     <div class="form-group">
       <label for="subject">Subject</label>
       <input type="text" formControlName="subject" class="form-control" id="subject" placeholder="Enter the subject">
+      <small id="subject" *ngIf="!updateForm.controls['subject'].valid && updateForm.controls['subject'].touched" class="form-text text-danger pull-right">Please enter a subject.</small>
     </div>
 
     <div class="form-group">
       <label for="description">Description</label>
       <textarea class="form-control" formControlName="description" id="description" rows="10"></textarea>
+      <small id="description" *ngIf="!updateForm.controls['description'].valid && updateForm.controls['description'].touched" class="form-text text-danger pull-right">Please enter a description.</small>
     </div>
 
     <button class="btn btn-primary btn-lg btn-block mt-3 mb-3 form-btn" [disabled]="!updateForm.valid">

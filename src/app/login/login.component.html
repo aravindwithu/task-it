@@ -12,17 +12,17 @@
       Google
     </button>
 
-    <button class="btn btn-info btn-lg btn-block btn-twitter mb-2">
+    <button class="disabled btn btn-info btn-lg btn-block btn-twitter mb-2">
       <span class="fa fa-twitter"></span>
       Twitter
     </button>
 
-    <button class="btn btn-primary btn-lg btn-block btn-facebook mb-2">
+    <button class="disabled btn btn-primary btn-lg btn-block btn-facebook mb-2">
         <span class="fa fa-facebook"></span>
         Facebook
     </button>
 
-    <button class="btn btn-dark btn-lg btn-block btn-github mb-2">
+    <button class="disabled btn btn-dark btn-lg btn-block btn-github mb-2">
       <span class="fa fa-github"></span>
       GitHub
     </button>
@@ -39,19 +39,19 @@
       <h4 class="text-success text-center p-1">Login</h4>
 
       <div class="form-group">
-        <small id="invalidLogin" *ngIf="false" class="form-text text-danger">Invalid login email or password.</small>
+        <small id="invalidLogin" *ngIf="isLoginError" class="form-text text-danger">Invalid login email or password.</small>
       </div>
 
       <div class="form-group">
         <label for="email">Email address</label>
         <input type="email" formControlName="login_email" class="form-control" id="email" placeholder="Enter email">
-        <small id="emailMand" *ngIf="!loginForm.controls['login_email'].valid && loginForm.controls['login_email'].touched" class="form-text text-danger">Please enter valid email.</small>
+        <small id="emailMand" *ngIf="!loginForm.controls['login_email'].valid && loginForm.controls['login_email'].touched" class="form-text text-danger pull-right">Please enter valid email.</small>
       </div>
 
       <div class="form-group">
         <label for="password">Password</label>
         <input type="password" formControlName="login_password" class="form-control" id="password" placeholder="Password">
-        <small id="passwordMand" *ngIf="!loginForm.controls['login_password'].valid && loginForm.controls['login_password'].touched" class="form-text text-danger">Please enter a password.</small>
+        <small id="passwordMand" *ngIf="!loginForm.controls['login_password'].valid && loginForm.controls['login_password'].touched" class="form-text text-danger pull-right">Please enter a password.</small>
         <small id="passwordHelp" class="form-text text-primary">Forgot Password</small>
       </div>
       

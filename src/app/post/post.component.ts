@@ -4,12 +4,13 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../shared/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ValidationService } from '../shared/validation.service';
 import { environment } from '../../environments/environment.prod';
-//import { environment } from '../../environments/environment';
+// import { environment } from '../../environments/environment';
 
 // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
-//const sgMail = require('@sendgrid/mail');
+// const sgMail = require('@sendgrid/mail');
 
 @Component({
   selector: 'app-post',
@@ -18,12 +19,12 @@ import { environment } from '../../environments/environment.prod';
 })
 export class PostComponent implements OnInit {
 
-  postForm:FormGroup = new FormGroup({
-    category:new FormControl(),
-    post_to:new FormControl(),
-    subject:new FormControl(),
-    description:new FormControl(),
-    status:new FormControl()
+  postForm: FormGroup = new FormGroup({
+    category: new FormControl(),
+    post_to: new FormControl(),
+    subject: new FormControl(),
+    description: new FormControl(),
+    status: new FormControl()
   });
 
   constructor(
@@ -31,11 +32,12 @@ export class PostComponent implements OnInit {
     private db: AngularFirestore,
     private auth: AuthService,
     private router:Router,
+    private validation: ValidationService
     // private smtp:SmtpService
   ) { 
     this.postForm = fb.group({
       category: ["(S) Self", Validators.required],
-      post_to : [null, Validators.required],
+      post_to : [null, Validators.compose([Validators.required, Validators.pattern(validation.getEmailPattern())])],
       subject : [null, Validators.required],
       description : [null, Validators.required],
     });
@@ -44,7 +46,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.auth.authUserState().then((res) => {
       if(res){
-       //donothing
+        // donothing
       }else{
         this.router.navigate(['/cover']);
       }

@@ -8,23 +8,26 @@
         <select class="form-control post-to-select text-primary bg-outline-primary" formControlName="category" id="category">
           <option>(S) Self</option>
           <option>(F) Friend</option>
-          <option>(C) Collegue</option>
           <option>(T) Team</option>
+          <!-- <option>(C) Collegue</option>
           <option>(G) Group</option>
-          <option>(O) Circle</option>
+          <option>(O) Circle</option> -->
         </select>
         <input type="text" formControlName="post_to" class="form-control post-to-input" id="post_to" placeholder="Whom to post">
       </div>
+      <small id="emailMand" *ngIf="!postForm.controls['post_to'].valid && postForm.controls['post_to'].touched" class="form-text text-danger pull-right">Please enter valid email.</small>
     </div> 
 
     <div class="form-group">
       <label for="subject">Subject</label>
       <input type="text" formControlName="subject" class="form-control" id="subject" placeholder="Enter the subject">
+      <small id="subjectMand" *ngIf="!postForm.controls['subject'].valid && postForm.controls['subject'].touched" class="form-text text-danger pull-right">Please enter a subject.</small>
     </div>
 
     <div class="form-group">
       <label for="description">Description</label>
       <textarea class="form-control" formControlName="description" id="description" rows="10"></textarea>
+      <small id="descriptionMand" *ngIf="!postForm.controls['description'].valid && postForm.controls['description'].touched" class="form-text text-danger pull-right">Please enter a description.</small>
     </div>
 
     <button class="btn btn-primary btn-lg btn-block mt-3 mb-3 form-btn" [disabled]="!postForm.valid">

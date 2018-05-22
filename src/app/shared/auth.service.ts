@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   login(email, password){
-    var promise = new Promise((res)=>{
+    var promise = new Promise((res,rej)=>{
       this.af.auth.signInWithEmailAndPassword(email, password).then((user)=>{
         if (user) {
           this._status = true;
@@ -59,13 +59,15 @@ export class AuthService {
           this.eventsManager.isLoggedIn(false);
         }
         res(this._status);
+      }).catch((err)=>{
+        rej(err);
       });
     });
     return promise;
   }
 
   loginWithGoogle() {
-    var promise = new Promise((res)=>{
+    var promise = new Promise((res,rej)=>{
       this.af.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((user)=>{
         if (user) {
           this._status = true;
@@ -75,6 +77,8 @@ export class AuthService {
           this.eventsManager.isLoggedIn(false);
         }
         res(this._status);
+      }).catch((err)=>{
+        rej(err);
       });
     });
     return promise;

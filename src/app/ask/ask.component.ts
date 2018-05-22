@@ -4,6 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from '../shared/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ValidationService } from '../shared/validation.service';
 
 @Component({
   selector: 'app-ask',
@@ -23,11 +24,12 @@ export class AskComponent implements OnInit {
     private fb:FormBuilder,
     private db: AngularFirestore,
     private router:Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private validation: ValidationService
   ) { 
     this.askForm = fb.group({
       category: ["(S) Self", Validators.required],
-      ask_to : [null, Validators.required],
+      ask_to : [null, Validators.compose([Validators.required, Validators.pattern(validation.getEmailPattern())])],
       subject : [null, Validators.required],
       description : [null, Validators.required],
     });
