@@ -1,4 +1,3 @@
-form validations,
 file deletion
 facebook, twitter, github logins.
 signup to profile to home
